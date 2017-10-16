@@ -15,61 +15,60 @@ import { NbAuthResult, NbAuthService } from '../../services/auth.service';
   template: `
     <nb-auth-block>
       <h2 class="title">上高公安</h2>
-      <small class="form-text sub-title">Hello! Sign in with your username or email</small>
+      <small class="form-text sub-title">欢迎您!输入您的邮件地址登陆</small>
 
       <form (ngSubmit)="login()" #form="ngForm" autocomplete="nope">
 
         <div *ngIf="showMessages.error && errors && errors.length > 0 && !submitted"
              class="alert alert-danger" role="alert">
-          <div><strong>Oh snap!</strong></div>
+          <div><strong>天啊!登陆失败!</strong></div>
           <div *ngFor="let error of errors">{{ error }}</div>
         </div>
 
         <div *ngIf="showMessages.success && messages && messages.length > 0 && !submitted"
              class="alert alert-success" role="alert">
-          <div><strong>Hooray!</strong></div>
+          <div><strong>恭喜!登陆成功!请稍候...</strong></div>
           <div *ngFor="let message of messages">{{ message }}</div>
         </div>
 
         <div class="form-group">
           <label for="input-email" class="sr-only">Email address</label>
           <input name="email" [(ngModel)]="user.email" id="input-email" pattern=".+\\@.+\\..+"
-                 class="form-control" placeholder="Email address" #email="ngModel"
+                 class="form-control" placeholder="邮件地址" #email="ngModel"
                  [class.form-control-danger]="email.invalid && email.touched" autofocus
                  [required]="getConfigValue('forms.validation.email.required')">
           <small class="form-text error" *ngIf="email.invalid && email.touched && email.errors?.required">
-            Email is required!
+            请输入邮件地址!
           </small>
           <small class="form-text error"
                  *ngIf="email.invalid && email.touched && email.errors?.pattern">
-            Email should be the real one!
+            输入正确的邮件地址!
           </small>
         </div>
 
         <div class="form-group">
           <label for="input-password" class="sr-only">Password</label>
           <input name="password" [(ngModel)]="user.password" type="password" id="input-password"
-                 class="form-control" placeholder="Password" #password="ngModel"
+                 class="form-control" placeholder="密 码" #password="ngModel"
                  [class.form-control-danger]="password.invalid && password.touched"
                  [required]="getConfigValue('forms.validation.password.required')"
                  [minlength]="getConfigValue('forms.validation.password.minLength')"
                  [maxlength]="getConfigValue('forms.validation.password.maxLength')">
           <small class="form-text error" *ngIf="password.invalid && password.touched && password.errors?.required">
-            Password is required!
+            请输入密码!
           </small>
           <small
             class="form-text error"
             *ngIf="password.invalid && password.touched && (password.errors?.minlength || password.errors?.maxlength)">
-            Password should contains
-            from {{ getConfigValue('forms.validation.password.minLength') }}
-            to {{ getConfigValue('forms.validation.password.maxLength') }}
-            characters
+            密码必须
+            是 {{ getConfigValue('forms.validation.password.minLength') }}
+            到 {{ getConfigValue('forms.validation.password.maxLength') }}
+            字符
           </small>
         </div>
 
         <div class="form-group accept-group col-sm-12">
-          <nb-checkbox name="rememberMe" [(ngModel)]="user.rememberMe">Remember me</nb-checkbox>
-          <a class="forgot-password" routerLink="../request-password">Forgot Password?</a>
+          <nb-checkbox name="rememberMe" [(ngModel)]="user.rememberMe">记住密码</nb-checkbox>
         </div>
 
         <button [disabled]="submitted || !form.valid" class="btn btn-block btn-hero-success"
@@ -77,20 +76,7 @@ import { NbAuthResult, NbAuthService } from '../../services/auth.service';
           登 陆
         </button>
       </form>
-
-      <div class="links">
-        <small class="form-text">Or connect with:</small>
-
-        <div class="socials">
-          <a href="https://github.com/akveo" target="_blank" class="socicon-github"></a>
-          <a href="https://www.facebook.com/akveo/" target="_blank" class="socicon-facebook"></a>
-          <a href="https://twitter.com/akveo_inc" target="_blank" class="socicon-twitter"></a>
-        </div>
-
-        <small class="form-text">
-          Don't have an account? <a routerLink="../register"><strong>Sign Up</strong></a>
-        </small>
-      </div>
+	  
     </nb-auth-block>
   `,
 })
