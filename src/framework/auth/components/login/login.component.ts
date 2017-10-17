@@ -15,7 +15,7 @@ import { NbAuthResult, NbAuthService } from '../../services/auth.service';
   template: `
     <nb-auth-block>
       <h2 class="title">上高公安</h2>
-      <small class="form-text sub-title">欢迎您!输入您的邮件地址登陆</small>
+      <small class="form-text sub-title">欢迎您！ 输入邮件地址登陆</small>
 
       <form (ngSubmit)="login()" #form="ngForm" autocomplete="nope">
 
@@ -42,7 +42,7 @@ import { NbAuthResult, NbAuthService } from '../../services/auth.service';
           </small>
           <small class="form-text error"
                  *ngIf="email.invalid && email.touched && email.errors?.pattern">
-            输入正确的邮件地址!
+            邮件地址格式不正确!
           </small>
         </div>
 
